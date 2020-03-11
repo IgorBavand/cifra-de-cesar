@@ -1,6 +1,6 @@
 //José Igor de Sousa - 404735
 #include <stdio.h>
-
+#include<stdlib.h>
 
 int main()
 {
@@ -63,7 +63,7 @@ int main()
         palavra_criptografada[tamanho_palavra] = '\0'; // para palvras sem espaços
         
 
-        printf("A criptografia e: %s", palavra_criptografada);
+        printf("A criptografia e: %s\n\n", palavra_criptografada);
         // printf("%d", tamanho_criptografia);
 
         //a ligeira raposa marrom saltou sobre o cachorro cansado
@@ -88,10 +88,79 @@ int main()
             tamanho_palavra++;
         }
         tamanho_palavra = tamanho_palavra - 1;
-        char palavra_criptografada[200];
+        char palavra_descriptografada[200];
+
+        int i = 0, l = 0, cont = 0;
+        do
+        { //para percorrer a string
+            l = 0;
+            do
+            { //percorrer o alfabeto
+                if (palavra[i] == ' ')
+                {
+                    palavra_descriptografada[i] = ' ';
+                    cont++;
+                }else if(){
+
+                }else
+                {
+
+                    if (palavra[i] == alfabeto[l])
+                    { //procurar a posicao da letra da palavra no alfabeto
+                        int k = 0;
+                        posi = l ;
+                        do
+                        { //quantas posições ele vai andar para frente no alfabeto
+                            posi--;
+                            if (posi < 0)
+                            { //quando passar de 'z' zera a posição
+                                posi = 25;
+                            }
+                            k++;
+                        } while (k < chave);
+                        /*if (posi > l)
+                        { //sempre que passa de 'z' para 'a' ele começa de 1, então decrementa para 0
+                            posi = posi - 1;
+                        }*/
+                        palavra_descriptografada[i] = alfabeto[posi]; //pegando a letra da posição da chave
+                    }
+                }
+                l++;
+            } while (l < 26);
+            i++;
+        } while (i < tamanho_palavra);
+        palavra_descriptografada[tamanho_palavra] = '\0'; // para palvras sem espaços
+
+        printf("A criptografia e: %s\n\n", palavra_descriptografada);
     }
-    criptografar();
+    int opc=0;
     
+
     
-    return 0;
+    do{
+        
+        puts("*********************Cifra de Cesar**********************");
+        puts("|\t\t\t\t\t\t\t|");
+        puts("|\t1 - Criptografar\t\t\t\t|");
+        puts("|\t2 - Descriptografar\t\t\t\t|");
+        puts("|\t3 - Sair\t\t\t\t\t|");
+        puts("|\t\t\t\t\t\t\t|");
+        puts("*********************************************************");
+        puts("Digite a opcao: ");
+        scanf("%d", &opc);
+
+    if(opc == 1){
+        criptografar();
+    }else if(opc == 2){
+        decript();
+    }else if(opc == 3){
+        opc = 3;
+    }else{
+        puts("Opcao invalida, tente novamente xD");
+    }
+
+    }while(opc != 3);
+    
+
+        return 0;
 }
